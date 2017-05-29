@@ -16,7 +16,10 @@ exports.userLocation = function(loc, symp, displayDoctors) {
 
 function getDoctors(loc, symp, displayDoctors) {
   $.get('https://api.betterdoctor.com/2016-03-01/doctors?query='+symp+'&location='+loc.lat+'%2C'+loc.lng+',100&skip=0&limit=20&user_key='+apiKeyBetterDoctor).then(function(result) {
-    displayDoctors(result);
+    // displayDoctors(result);
+    result.data.forEach(function(doctor) {
+      debugger;
+    })
   }).fail(function(error) {
     alert(error.responseJSON.message);
   });
