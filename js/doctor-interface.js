@@ -1,15 +1,13 @@
 var userLocation = require('./../js/doctor.js').userLocation;
 var getDoctors = require('./../js/doctor.js').getDoctors;
 
-var displayDoctor = function(result) {
+var displayDoctors = function(result) {
   result.data.forEach(function(doctor){
     var name = doctor.profile.first_name + ' ' + doctor.profile.last_name + ' ' + doctor.profile.title;
     var imageURL = doctor.profile.image_url;
     var specialty = doctor.specialties[0].actor;
     var description = doctor.specialties[0].description;
-    var newMapMarker = new Marker();
   });
-
 };
 
 $(document).ready(function() {
@@ -24,7 +22,7 @@ $(document).ready(function() {
     event.preventDefault();
     var loc = $('#location').val();
     var symp = $('#symptoms').val();
-    getDoctors(loc, symptoms, displayDoctor);
+    userLocation(loc, symp, displayDoctors);
+    // getDoctors(loc, symptoms, displayDoctors);
   });
-
 });
