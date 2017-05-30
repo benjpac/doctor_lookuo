@@ -11,7 +11,7 @@ exports.userLocation = function(loc, symp, displayDoctors) {
     console.log('user map loc: ' + geoLoc);
     getDoctors(geoLoc, symp, map, displayDoctors);
   }).fail(function(error) {
-    alert(error.responseJSON.message);
+    alert('something went wrong');
   });
 };
 
@@ -19,6 +19,6 @@ function getDoctors(geoLoc, symp, map, displayDoctors) {
   $.get('https://api.betterdoctor.com/2016-03-01/doctors?query='+symp+'&location='+geoLoc.lat+'%2C'+geoLoc.lng+',100&skip=0&limit=20&user_key='+apiKeyBetterDoctor).then(function(result) {
     displayDoctors(result, map);
   }).fail(function(error) {
-    alert(error.responseJSON.message);
+    alert('something went wrong');
   });
 }
