@@ -27,21 +27,28 @@
               <h3>Find Doctors</h3>
               <form id="find-doctor">
                 <div class="form-group">
-                  <label for="location">Location (zip, or city / state)</label>
-                  <input id="location" class="form-control" type="text">
-                </div>
-                <div class="form-group">
                   <label for="symptoms">Symptoms</label>
                   <input id="symptoms" class="form-control" type="text">
                 </div>
+                <div class="form-group">
+                  <label for="location">Location (zip, or city / state)</label>
+                  <input id="location" class="form-control" type="text" required>
+                </div>
                 <button type="submit" class="btn btn-success">Submit</button>
               </form>
+              <br>
+              <div id="doctors">
+
+              </div>
             </div>
-            <div id="profile" class="col-md-6">
-              <h2 id="nameID"></h2>
-              <img id="imageID">
-              <h3 id="ageID"></h3>
-              <h3 id="aboutID"></h3>
+            <div class="col-md-6">
+              <div id="profile">
+                <h2 id="fullName"></h2>
+                <img id="imageURL">
+                <h4 id="specialty"></h4>
+                <p id="bio"></p>
+                <p id="address"></p>
+              </div>
             </div>
           </div>
         </div>

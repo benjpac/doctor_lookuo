@@ -1,12 +1,40 @@
 var userLocation = require('./../js/doctor.js').userLocation;
 var getDoctors = require('./../js/doctor.js').getDoctors;
 
-var displayDoctors = function(result) {
-  result.data.forEach(function(doctor){
-    var name = doctor.profile.first_name + ' ' + doctor.profile.last_name + ' ' + doctor.profile.title;
+function displayDoctorPanel(fullName, imageURL, specialty, bio, address) {
+  $('#profile').show();
+  $('#fullName').text(fullName);
+  $('#imageURL').attr('src', imageURL);
+  $('#specialty').text(specialty);
+  $('#bio').text(bio);
+  $('#address').text(address);
+}
+
+var displayDoctors = function(result, map) {
+  $('#doctors').empty();
+  $('#profile').hide();
+  result.data.forEach(function(doctor) {
+    var docID = doctor.practices[0].uid;
+    var fullName = doctor.profile.first_name+' '+doctor.profile.last_name+' '+doctor.profile.title;
     var imageURL = doctor.profile.image_url;
-    var specialty = doctor.specialties[0].actor;
-    var description = doctor.specialties[0].description;
+    var specialty = doctor.specialties[0].name;
+    var geoLoc = { lat: doctor.practices[0].lat, lng: doctor.practices[0].lon};
+    var bio = doctor.profile.bio;
+    var addressObj = doctor.practices[0].visit_address;
+    var address = addressObj.street+addressObj.street2+', '+addressObj.city+', '+addressObj.state+' '+addressObj.zip;
+    $('#doctors').append('<p class="clickable" id='+docID+'><strong>'+fullName+'</strong>, '+specialty+'</p>');
+    $('#'+docID).click(function() {
+      displayDoctorPanel(fullName, imageURL, specialty, bio, address)
+    })
+    var marker = new google.maps.Marker( {
+      position: geoLoc,
+      map: map
+    });
+    marker.addListener('click', function() {
+      map.setZoom(13);
+      map.setCenter(marker.getPosition());
+      displayDoctorPanel(fullName, imageURL, specialty, bio, address)
+    });
   });
 };
 

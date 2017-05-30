@@ -1,9 +1,20 @@
 img {
-  border-radius: 10%;
-  width: 100%;
+  border-radius: 5%;
+  width: 50%;
 }
 
 #map {
  height: 400px;
  width: 100%;
+}
+
+.clickable {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+.clickable:hover {
+  text-decoration:none;
+  text-shadow: 1px 1px 1px #555;
 }
